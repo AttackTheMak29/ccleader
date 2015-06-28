@@ -1,4 +1,13 @@
 class EntriesController < ApplicationController
+  
+  after_action :set_access_control_headers
+  protect_from_forgery :except => [:create, :delete, :update]
+
+  def set_access_control_headers
+    headers['Access-Control-Allow-Origin'] = "*"
+    headers['Access-Control-Request-Method'] = %w{GET POST OPTIONS}.join(",")
+  end
+
   def show
     entry = retrieve_service.execute(name: params[:id])
     return not_found unless entry

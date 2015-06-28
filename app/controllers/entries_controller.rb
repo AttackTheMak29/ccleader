@@ -21,7 +21,7 @@ class EntriesController < ApplicationController
   end
 
   def create
-    result = create_service.execute(entry_params)
+    result = create_service.execute(params)
     respond_to do |format|
       format.html do
         redirect_to root_path(page: result[:page])

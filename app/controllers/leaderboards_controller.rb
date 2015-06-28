@@ -1,5 +1,16 @@
 class LeaderboardsController < ApplicationController
   before_action :query_options
+  after_action :allow_iframe, only: :embed
+
+  def embed
+  end
+
+  private
+
+    def allow_iframe
+      response.headers.except! 'X-Frame-Options'
+    end
+  end
 
   def show
     @lb = Boards.default_leaderboard
@@ -27,4 +38,3 @@ class LeaderboardsController < ApplicationController
   def entry_service
     Boards::GetAllService.new
   end
-end

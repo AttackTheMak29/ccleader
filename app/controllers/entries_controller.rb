@@ -7,7 +7,7 @@ class EntriesController < ApplicationController
     headers['Access-Control-Allow-Origin'] = "*"
     headers['Access-Control-Request-Method'] = %w{GET POST OPTIONS}.join(",")
   end
-
+  
   def show
     entry = retrieve_service.execute(name: params[:id])
     return not_found unless entry
@@ -65,7 +65,7 @@ class EntriesController < ApplicationController
   end
 
   def retrieve_service
-    Boards::GetService.new
+    Boards::GetAllService.new
   end
 
   def delete_service
